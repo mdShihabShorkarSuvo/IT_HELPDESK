@@ -29,7 +29,7 @@
                 <ul>
                     <li><a href="#" data-page="notifications" class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
                     <li><a href="#" data-page="dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="#" data-page="support-tickets" class="menu-item"><i class="fas fa-ticket-alt"></i> Support Tickets</a></li>
+                    <li><a href="#" data-page="assigned_task" class="menu-item"><i class="fas fa-ticket-alt"></i> Assigned Task</a></li>
                     <li><a href="#" data-page="system-status" class="menu-item"><i class="fas fa-server"></i> System Status</a></li>
                     <li><a href="#" data-page="network-monitoring" class="menu-item"><i class="fas fa-network-wired"></i> Network Monitoring</a></li>
                     <li><a href="#" data-page="calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
