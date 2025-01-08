@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+if ($_SESSION['role'] !== 'user') {
+    header("Location: ../login.php");  // If not user, redirect to login page
+    exit();
+}
+include '../db.php';
+
+$user_email = $_SESSION['email'];
+$user_role = $_SESSION['role'];
+
+$sql = "SELECT * FROM users WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $user_email);
+$stmt->execute();
+$user = $stmt->get_result()->fetch_assoc(); // Assuming user details are fetched successfully
+$user_name = $user['name'];
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +42,9 @@
             <div class="user-panel">
                 <img src="../images/user.png" id="profile-img" alt="Profile" onerror="this.src='../images/user.png';">
                 <div class="profile-dropdown">
-                    <span id="profile-name">User Name</span>
+                <div class="profile-info">
+                        <span id="profile-name"><?php echo htmlspecialchars($user_name); ?></span> <!-- Display the user's name -->
+                    </div>
                     <div id="profile-options" class="dropdown-content">
                         <a href="#" id="edit-profile">Edit Profile</a>
                         <a href="#" id="logout">Logout</a>
