@@ -3,101 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Ticket</title>
-    <link rel="stylesheet" href="form.css">
+    <title>IT Support Dashboard</title>
     <style>
-        .ticket-container {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+        /* Reset styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f5f7;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
             border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .ticket-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border-radius: 8px 8px 0 0;
-            font-size: 18px;
-            font-weight: bold;
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
         }
-        .ticket-body {
-            padding: 20px;
+
+        .btn {
+            display: block;
+            margin: 20px auto;
+            background-color: #4e73df;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
         }
-        .ticket-body .form-group {
+
+        .btn:hover {
+            background-color: #375a7f;
+        }
+
+        .form-group {
             margin-bottom: 15px;
         }
-        .ticket-body label {
+
+        label {
             display: block;
-            margin-bottom: 5px;
             font-weight: bold;
+            margin-bottom: 5px;
         }
-        .ticket-body input, .ticket-body select, .ticket-body textarea {
+
+        input, select, textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 14px;
         }
-        .ticket-body .btn {
-            background-color: #007bff;
-            color: #fff;
+
+        textarea {
+            resize: none;
+        }
+
+        .btn-submit {
+            background-color: #4e73df;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
             border: none;
-            padding: 10px 20px;
             border-radius: 4px;
             cursor: pointer;
+            width: 100%;
         }
-        .ticket-body .btn:hover {
-            background-color: #0056b3;
+
+        .btn-submit:hover {
+            background-color: #375a7f;
         }
     </style>
 </head>
 <body>
-    <div class="ticket-container">
-        <div class="ticket-header">Submit Ticket</div>
-        <div class="ticket-body">
-            <form action="process.php" method="post" class="form">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+    <div class="container">
+        <h1>IT Support Dashboard</h1>
 
+        <!-- The form is now always visible -->
+        <div class="form-container" id="formContainer">
+            <form action="process.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="id">ID:</label>
-                    <input type="text" id="id" name="student_id" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="Problem_categories">Problem Categories:</label>
-                    <select id="Problem_categories" name="Problem_categories" required>
-                        <option value="B1">Hardware</option>
-                        <option value="B2">Software</option>
-                        <option value="B3">Network Problems</option>
+                    <label for="category" >Category:</label>
+                    <select id="category" name="category" required>
+                        <option value="">Choose one</option>
+                        <option value="Hardware">Hardware</option>
+                        <option value="Software">Software</option>
+                        <option value="Network">Network Problems</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" required>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Enter the title of your request" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="token">Token Number:</label>
-                    <input type="number" id="token" name="token" min="0">
+                    <label for="description">Request Details:</label>
+                    <textarea id="description" name="description" rows="5" placeholder="How can we help?" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Problem Description:</label>
-                    <textarea name="description" id="description" rows="5" cols="30" required></textarea>
+                    <label for="attachment">Attachment:</label>
+                    <input type="file" id="attachment" name="attachment">
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" name="submit" value="Submit" class="btn">
+                    <button type="submit" class="btn-submit">Submit</button>
                 </div>
             </form>
         </div>
