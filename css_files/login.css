@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url("images/hero-bg.jpg") center/cover no-repeat;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    z-index: 1;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+h2 {
+    margin-bottom: 25px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.input-field {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.input-field .icon {
+    padding: 12px;
+    background: #f0f0f0;
+    color: #666;
+    font-size: 1rem;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+.input-field input:focus {
+    box-shadow: 0 0 6px rgba(106, 17, 203, 0.3);
+}
+
+.custom-dropdown {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.custom-dropdown select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #6a11cb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #2575fc;
+}
+
+.forgot-pass-link {
+    display: block;
+    margin: 15px 0;
+    color: #6a11cb;
+    text-decoration: none;
+}
+
+.signup-prompt {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.signup-prompt a {
+    color: #6a11cb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #ff0000;
+}
+
+.forgot-pass-link:hover {
+    color: #0056b3; /* Change color on hover */
+    text-decoration: underline; /* Underline the link on hover */
+}
+
+.signup-link:hover {
+    color: #0056b3; /* Change color on hover */
+    text-decoration: underline; /* Underline the link on hover */
+}
