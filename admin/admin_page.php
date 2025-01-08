@@ -30,7 +30,7 @@
                     <li><a href="#" data-page="notifications" class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
                     <li><a href="#" data-page="dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     <li><a href="#" data-page="manage-users" class="menu-item"><i class="fas fa-users"></i> Manage Users</a></li>
-                    <li><a href="#" data-page="reports" class="menu-item"><i class="fas fa-file-alt"></i> Reports</a></li>
+                    <li><a href="#" data-page="Ticket-Management" class="menu-item"><i class="fas fa-file-alt"></i> Ticket Management</a></li>
                     <li><a href="#" data-page="settings" class="menu-item"><i class="fas fa-cogs"></i> Settings</a></li>
                     <li><a href="#" data-page="calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
                 </ul>
