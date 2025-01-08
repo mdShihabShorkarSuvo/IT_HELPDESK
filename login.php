@@ -1,57 +1,3 @@
-<?php
-session_start();
-include 'db.php'; // Include your database connection file
-
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
-
-    // Basic input validation
-    if (empty($email) || empty($password) || empty($role)) {
-        echo "<script>alert('Please fill out all fields.');</script>";
-    } else {
-        // Validate email and role in the database
-        $sql = "SELECT * FROM users WHERE email = '$email' AND role = '$role'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-
-            // Verify password using password_verify
-            if (password_verify($password, $user['password'])) {
-                // Correct credentials, create a session
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['role'] = $user['role'];
-
-                // Redirect to the user page (or role-specific page)
-                header('Location: user_page.php');
-                exit();
-            } else {
-                // Incorrect password
-                echo "<script>alert('Invalid password');</script>";
-            }
-        } else {
-            // Invalid email or role
-            echo "<script>alert('Invalid email or role');</script>";
-        }
-    }
-}
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="login-container">
         <a href="index.php" class="close-btn" title="Close">&times;</a>
         <h2>LOGIN</h2>
-        <form action="login.php" method="POST">
+        <form action="login_process.php" method="POST">
             <div class="input-field">
                 <i class="fas fa-envelope icon"></i>
                 <input type="text" name="email" placeholder="Email" required>
