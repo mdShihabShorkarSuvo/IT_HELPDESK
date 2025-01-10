@@ -16,14 +16,10 @@ $stmt->bind_param("s", $user_email);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc(); // Assuming user details are fetched successfully
 $user_name = $user['name'];
-$_SESSION['user_id'] = $user['user_id']
-
-
+$profile_picture = $user['profile_picture']; // Fetch profile picture
+$_SESSION['user_id'] = $user['user_id'];
 
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,9 +39,13 @@ $_SESSION['user_id'] = $user['user_id']
                 <h2>IT Staff Panel</h2>
             </div>
             <div class="user-panel">
-                <img src="../images/user.png" id="profile-img" alt="Profile" onerror="this.src='../images/user.png';">
+                <?php if ($profile_picture): ?>
+                    <img src="<?php echo htmlspecialchars($profile_picture); ?>" id="profile-img" alt="Profile" onerror="this.src='../images/user.png';">
+                <?php else: ?>
+                    <img src="../images/user.png" id="profile-img" alt="Profile" onerror="this.src='../images/user.png';">
+                <?php endif; ?>
                 <div class="profile-dropdown">
-                <div class="profile-info">
+                    <div class="profile-info">
                         <span id="profile-name"><?php echo htmlspecialchars($user_name); ?></span> <!-- Display the user's name -->
                     </div>
                     <div id="profile-options" class="dropdown-content">

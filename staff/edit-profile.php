@@ -39,6 +39,8 @@ if (!$name) {
             <div class="profile-info">
                 <?php if ($profile_picture): ?>
                     <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" class="profile-picture">
+                <?php else: ?>
+                    <img src="../images/user.png" alt="Profile Picture" class="profile-picture">
                 <?php endif; ?>
                 <h2><?php echo htmlspecialchars($name); ?></h2>
                 <p><?php echo htmlspecialchars($email); ?></p>
