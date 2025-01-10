@@ -40,7 +40,7 @@ $escalatedTickets = $ticketCounts['escalated_count']; // New 'Escalated' status
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>User Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Basic dashboard styling */
@@ -104,7 +104,7 @@ $escalatedTickets = $ticketCounts['escalated_count']; // New 'Escalated' status
 </head>
 <body>
 
-    <h1 style="text-align: center; margin-top: 40px;">Dashboard</h1>
+    <h1 style="text-align: center; margin-top: 40px;">User Dashboard</h1>
 
     <div class="dashboard">
         <!-- Card to show total tickets count -->
