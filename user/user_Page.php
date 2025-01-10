@@ -16,6 +16,7 @@ $stmt->bind_param("s", $user_email);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc(); // Assuming user details are fetched successfully
 $user_name = $user['name'];
+$_SESSION['user_id'] = $user['user_id']
 
 
 

@@ -50,3 +50,26 @@ function loadPageContent(page) {
             document.getElementById('content').innerHTML = `<p class="error">Failed to load the page. Please try again later.</p>`;
         });
 }
+
+// Handle "Edit Profile" click (sidebar navigation)
+document.getElementById('edit-profile').addEventListener('click', function () {
+    window.location.href = 'edit-profile.php'; // Redirect to the edit profile page
+}
+
+);
+
+document.getElementById('logout').addEventListener('click', function(event) {
+    event.preventDefault();  // Prevent the link from executing the default action
+
+    // Ask for confirmation before logging out
+    const confirmation = confirm('Are you sure you want to log out?');
+    if (confirmation) {
+        window.location.href = 'logout.php';  // Redirect to logout.php to end the session
+    }
+});
+
+
+
+
+
+

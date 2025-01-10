@@ -1,10 +1,37 @@
+<?php
+session_start();
+
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: ../login.php");  // If not user, redirect to login page
+    exit();
+}
+include '../db.php';
+
+$user_email = $_SESSION['email'];
+$user_role = $_SESSION['role'];
+
+$sql = "SELECT * FROM users WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $user_email);
+$stmt->execute();
+$user = $stmt->get_result()->fetch_assoc(); // Assuming user details are fetched successfully
+$user_name = $user['name'];
+$_SESSION['user_id'] = $user['user_id']
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -16,9 +43,11 @@
                 <h2>Admin Panel</h2>
             </div>
             <div class="user-panel">
-            <img src="../images/user.png" id="profile-img" alt="Profile" onerror="this.src='../images/user.png';">
+                <img src="../images/user.png" id="profile-img" alt="Profile" onerror="this.src='../images/user.png';">
                 <div class="profile-dropdown">
-                    <span id="profile-name">Admin Name</span>
+                <div class="profile-info">
+                        <span id="profile-name"><?php echo htmlspecialchars($user_name); ?></span> <!-- Display the user's name -->
+                    </div>
                     <div id="profile-options" class="dropdown-content">
                         <a href="#" id="edit-profile">Edit Profile</a>
                         <a href="#" id="logout">Logout</a>
@@ -46,6 +75,6 @@
         </main>
     </div>
 
-    <script src="dashboard.js"></script>
+    <script src="admin.js"></script>
 </body>
 </html>

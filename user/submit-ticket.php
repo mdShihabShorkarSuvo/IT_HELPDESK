@@ -10,12 +10,15 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f5f7;
             color: #333;
+            overflow-x: hidden;
+          
         }
 
         .container {
@@ -25,6 +28,7 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
         h1 {
@@ -65,6 +69,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
+
         }
 
         textarea {
@@ -85,15 +90,40 @@
         .btn-submit:hover {
             background-color: #375a7f;
         }
+
+         
+        #message {
+            display: none;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+        #message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        #message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+
     </style>
+
+
 </head>
 <body>
+<div id="message"></div> 
     <div class="container">
         <h1>IT Support Dashboard</h1>
 
         <!-- The form is now always visible -->
-        <div class="form-container" id="formContainer">
-            <form action="process.php" method="post" enctype="multipart/form-data">
+        <div class="form-container" id="ticketForm">
+            <form action="submit-process.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="category" >Category:</label>
                     <select id="category" name="category" required>
@@ -127,3 +157,9 @@
     </div>
 </body>
 </html>
+
+<?php
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    echo "<p style='color: green;'>Ticket submitted successfully!</p>";
+}
+?>
