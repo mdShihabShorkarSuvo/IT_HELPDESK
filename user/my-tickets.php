@@ -77,6 +77,18 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
             margin-right: 10px;
             cursor: pointer;
         }
+        .ticket-button {
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .ticket-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -112,7 +124,20 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tbody>
                 <?php foreach ($tickets as $ticket): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($ticket['ticket_id']); ?></td>
+                        <td>
+                            <form method="post" action="print_ticket.php" style="display:inline;">
+                                <input type="hidden" name="ticket_id" value="<?php echo htmlspecialchars($ticket['ticket_id']); ?>">
+                                <input type="hidden" name="assigned_to" value="<?php echo htmlspecialchars($ticket['assigned_to']); ?>">
+                                <input type="hidden" name="category" value="<?php echo htmlspecialchars($ticket['category']); ?>">
+                                <input type="hidden" name="title" value="<?php echo htmlspecialchars($ticket['title']); ?>">
+                                <input type="hidden" name="priority" value="<?php echo htmlspecialchars($ticket['priority']); ?>">
+                                <input type="hidden" name="status" value="<?php echo htmlspecialchars($ticket['status']); ?>">
+                                <input type="hidden" name="deadline" value="<?php echo htmlspecialchars($ticket['deadline']); ?>">
+                                <button type="submit" class="ticket-button">
+                                    <?php echo htmlspecialchars($ticket['ticket_id']); ?>
+                                </button>
+                            </form>
+                        </td>
                         <td><?php echo htmlspecialchars($ticket['assigned_to']); ?></td>
                         <td><?php echo htmlspecialchars($ticket['category']); ?></td>
                         <td><?php echo htmlspecialchars($ticket['title']); ?></td>
