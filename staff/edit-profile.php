@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-if ($_SESSION['role'] !== 'staff') {
-    header("Location: ../login.php"); // Redirect to login page if not a staff
+if ($_SESSION['role'] !== 'it_staff') {
+    header("Location: ../login.php"); // Redirect to login page if not a user
     exit();
 }
 
 // Include database connection
 include('../db.php');
 
-$staff_email = $_SESSION['email'];
+$user_email = $_SESSION['email'];
 
-// Fetch staff information from the database
-$query = "SELECT name, email, profile_picture, phone_number, address, gender FROM staff WHERE email = ?";
+// Fetch user information from the database
+$query = "SELECT name, email, profile_picture, phone_number, address, gender FROM users WHERE email = ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("s", $staff_email);
+$stmt->bind_param("s", $user_email);
 $stmt->execute();
 $stmt->bind_result($name, $email, $profile_picture, $phone_number, $address, $gender);
 $stmt->fetch();
@@ -22,73 +22,6 @@ $stmt->close();
 
 if (!$name) {
     die("Staff not found.");
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_picture'])) {
-    $staff_id = $_SESSION['staff_id'];
-    $target_dir = "../images/";
-    $target_file = $target_dir . basename($_FILES["profile_picture"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-    // Check if image file is a actual image or fake image
-    $check = getimagesize($_FILES["profile_picture"]["tmp_name"]);
-    if ($check !== false) {
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-
-    // Check file size
-    if ($_FILES["profile_picture"]["size"] > 500000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
-            // Ensure GD library is available
-            if (!function_exists('imagecreatefromstring')) {
-                die("GD library is not available.");
-            }
-
-            // Crop the image
-            $src = imagecreatefromstring(file_get_contents($target_file));
-            $width = imagesx($src);
-            $height = imagesy($src);
-            $new_width = 200;
-            $new_height = 200;
-            $tmp = imagecreatetruecolor($new_width, $new_height);
-            imagecopyresampled($tmp, $src, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-            imagejpeg($tmp, $target_file, 100);
-            imagedestroy($src);
-            imagedestroy($tmp);
-
-            $sql = "UPDATE staff SET profile_picture = ? WHERE staff_id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("si", $target_file, $staff_id);
-            if ($stmt->execute()) {
-                echo "The file ". htmlspecialchars(basename($_FILES["profile_picture"]["name"])). " has been uploaded.";
-                header("Location: staff_Page.php");
-                exit();
-            } else {
-                echo "Sorry, there was an error updating your profile picture.";
-            }
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
-    }
 }
 ?>
 
@@ -106,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_picture'])) {
             <div class="profile-info">
                 <?php if ($profile_picture): ?>
                     <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" class="profile-picture">
+                <?php else: ?>
+                    <img src="../images/user.png" alt="Profile Picture" class="profile-picture">
                 <?php endif; ?>
                 <h2><?php echo htmlspecialchars($name); ?></h2>
                 <p><?php echo htmlspecialchars($email); ?></p>
@@ -115,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_picture'])) {
         </div>
         <div class="form-container">
             <h2>Edit Personal Details</h2>
-            <form id="profile-form" method="POST" action="edit-profile.php" enctype="multipart/form-data">
+            <form id="profile-form" method="POST" action="update_profile.php" enctype="multipart/form-data">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
                 
@@ -139,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_picture'])) {
                 <input type="file" id="profile_picture" name="profile_picture">
 
                 <div class="form-buttons">
-                    <button type="button" class="cancel-button" onclick="window.location.href='staff_Page.php'">Cancel</button>
+                    <button type="button" class="cancel-button" onclick="window.location.href='it_staff.php'">Cancel</button>
                     <button type="submit" class="update-button">Update</button>
                 </div>
             </form>
