@@ -19,13 +19,35 @@ $gender = $_POST['gender'];
 // Handle file upload for profile picture
 $profile_picture = null;
 if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
-    $target_dir = "../uploads/";
-    $file_name = basename($_FILES['profile_picture']['name']);
-    $target_file = $target_dir . $file_name;
+    $allowed_types = ['image/jpeg', 'image/jpg', 'image/png'];
+    $max_size = 5 * 1024 * 1024; // 5 MB
+    $upload_dir = '../uploads/';
     
-    // Move uploaded file to the target directory
+    // Ensure the upload directory exists
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+    }
+    
+    $file_type = mime_content_type($_FILES['profile_picture']['tmp_name']);
+    $file_size = $_FILES['profile_picture']['size'];
+    
+    if (!in_array($file_type, $allowed_types)) {
+        die("Invalid file type. Only JPG and PNG files are allowed.");
+    }
+    
+    if ($file_size > $max_size) {
+        die("File size exceeds the 5MB limit.");
+    }
+    
+    $file_name = basename($_FILES['profile_picture']['name']);
+    $safe_name = uniqid() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file_name);
+    $target_file = $upload_dir . $safe_name;
+    
     if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $target_file)) {
-        $profile_picture = $target_file;
+        chmod($target_file, 0644); // Set secure permissions
+        $profile_picture = $target_file; // Store the file path in the database
+    } else {
+        die("Failed to upload file.");
     }
 }
 

@@ -18,7 +18,7 @@ $attachment = null;
 if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] == 0) {
     $allowed_types = ['image/jpeg','image/jpg', 'image/png', 'application/pdf'];
     $max_size = 5 * 1024 * 1024; // 5 MB
-    $upload_dir = 'uploads/';
+    $upload_dir = '../uploads/';
     
     $file_type = mime_content_type($_FILES['attachment']['tmp_name']);
     $file_size = $_FILES['attachment']['size'];

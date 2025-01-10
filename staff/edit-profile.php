@@ -16,13 +16,13 @@ $query = "SELECT name, email, profile_picture, phone_number, address, gender FRO
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $user_email);
 $stmt->execute();
-$result = $stmt->get_result();
+$stmt->bind_result($name, $email, $profile_picture, $phone_number, $address, $gender);
+$stmt->fetch();
+$stmt->close();
 
-if ($result->num_rows === 0) {
+if (!$name) {
     die("Staff not found.");
 }
-
-$user = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -37,33 +37,35 @@ $user = $result->fetch_assoc();
     <div class="edit-profile-container">
         <div class="profile-card">
             <div class="profile-info">
-                <img src="<?php echo htmlspecialchars($user['profile_picture']); ?>" alt="Profile Picture" class="profile-picture">
-                <h2><?php echo htmlspecialchars($user['name']); ?></h2>
-                <p><?php echo htmlspecialchars($user['email']); ?></p>
+                <?php if ($profile_picture): ?>
+                    <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" class="profile-picture">
+                <?php endif; ?>
+                <h2><?php echo htmlspecialchars($name); ?></h2>
+                <p><?php echo htmlspecialchars($email); ?></p>
                 <p>About</p>
-                <p>Hi, I'm <?php echo htmlspecialchars($user['name']); ?>. I enjoy creating meaningful experiences.</p>
+                <p>Hi, I'm <?php echo htmlspecialchars($name); ?>. I enjoy creating meaningful experiences.</p>
             </div>
         </div>
         <div class="form-container">
             <h2>Edit Personal Details</h2>
             <form id="profile-form" method="POST" action="update_profile.php" enctype="multipart/form-data">
                 <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
+                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
                 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
                 
                 <label for="phone_number">Phone Number</label>
-                <input type="text" id="phone_number" name="phone_number" value="<?php echo htmlspecialchars($user['phone_number']); ?>" required>
+                <input type="text" id="phone_number" name="phone_number" value="<?php echo htmlspecialchars($phone_number); ?>" required>
                 
                 <label for="address">Address</label>
-                <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
+                <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($address); ?>" required>
                 
                 <label for="gender">Gender</label>
                 <select id="gender" name="gender" required>
-                    <option value="Male" <?php if ($user['gender'] === 'Male') echo 'selected'; ?>>Male</option>
-                    <option value="Female" <?php if ($user['gender'] === 'Female') echo 'selected'; ?>>Female</option>
-                    <option value="Other" <?php if ($user['gender'] === 'Other') echo 'selected'; ?>>Other</option>
+                    <option value="Male" <?php if ($gender === 'Male') echo 'selected'; ?>>Male</option>
+                    <option value="Female" <?php if ($gender === 'Female') echo 'selected'; ?>>Female</option>
+                    <option value="Other" <?php if ($gender === 'Other') echo 'selected'; ?>>Other</option>
                 </select>
 
                 <label for="profile_picture">Profile Picture</label>
