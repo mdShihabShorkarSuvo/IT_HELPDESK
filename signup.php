@@ -67,6 +67,8 @@
                     <option value="" disabled selected>Select your role</option>
                     <option value="user">User</option>
                     <option value="it_staff">IT Staff</option>
+                    <option value="admin">admin</option>
+
                 </select>
                 <div class="error" id="role-error"></div>
             </div>

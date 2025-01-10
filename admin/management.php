@@ -46,11 +46,18 @@ $stmt_it_staff->execute();
 $it_staff_list = $stmt_it_staff->fetchAll(PDO::FETCH_ASSOC);
 
 // Handle IT staff assignment and updates
+// Handle IT staff assignment and updates
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get values from the form
     $assigned_to = $_POST['assigned_to'];
     $deadline = $_POST['deadline'];
     $priority = $_POST['priority'];
     $status = $_POST['status'];
+
+    // If "Remove IT Staff" is clicked (assigned_to is empty), set assigned_to to NULL
+    if (empty($assigned_to)) {
+        $assigned_to = NULL; // Set it to NULL if no IT staff is selected
+    }
 
     // Update the ticket's assigned IT staff, deadline, priority, and status
     $update_query = "
@@ -66,10 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt_update->bindParam(':ticket_id', $ticket_id, PDO::PARAM_INT);
     $stmt_update->execute();
 
-    // Redirect to the same page to refresh the data
+    // Redirect to refresh the data
     header("Location: management.php?ticket_id=" . $ticket_id);
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -246,9 +254,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <tr><th>Status</th>
                     <td>
                         <select name="status" required>
-                            <option value="Open" <?php echo ($ticket['status'] == 'Open') ? 'selected' : ''; ?>>Open</option>
+                            <option value="Pending" <?php echo ($ticket['status'] == 'Pending') ? 'selected' : ''; ?>>Pending</option>
                             <option value="In Progress" <?php echo ($ticket['status'] == 'In Progress') ? 'selected' : ''; ?>>In Progress</option>
-                            <option value="Closed" <?php echo ($ticket['status'] == 'Closed') ? 'selected' : ''; ?>>Closed</option>
+                            <option value="Resolved" <?php echo ($ticket['status'] == 'Resolved') ? 'selected' : ''; ?>>Resolved</option>
+                            <option value="Escalated" <?php echo ($ticket['status'] == 'Escalated') ? 'selected' : ''; ?>>Escalated</option>
+                            
                         </select>
                     </td>
                 </tr>
@@ -322,12 +332,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
     });
 
-    // Remove assignment logic
     removeAssignmentButton.addEventListener('click', () => {
-        assignedToInput.value = ''; // Clear assigned IT staff ID
-        assignedStaffDisplay.textContent = 'null'; // Reset displayed IT staff name
-        staffRows.forEach(row => row.classList.remove('selected'));
-    });
+    assignedToInput.value = ''; // Clear assigned IT staff ID
+    assignedStaffDisplay.textContent = 'null'; // Reset displayed IT staff name
+
+    // Reset selected row highlight
+    staffRows.forEach(item => item.classList.remove('selected'));
+
+    // You can also reset the server-side assigned staff ID in the ticket when submitting
+    // Set assigned_to field to null for removal during the update
+    assignedToInput.value = null; // Make sure the value is null when submitting the form
+});
+
+
 </script>
 
 </body>
