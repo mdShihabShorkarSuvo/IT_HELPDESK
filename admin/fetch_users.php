@@ -105,7 +105,9 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- Display all users initially -->
         <?php foreach ($users as $user): ?>
             <tr>
-                <td class="user-id"><?php echo htmlspecialchars($user['user_id']); ?></td>
+                <td class="user-id" onclick="goToDetails(<?php echo $user['user_id']; ?>)">
+                    <?php echo htmlspecialchars($user['user_id']); ?>
+                </td>
                 <td><?php echo htmlspecialchars($user['name']); ?></td>
                 <td><?php echo htmlspecialchars($user['address']); ?></td>
                 <td><?php echo htmlspecialchars($user['gender']); ?></td>
@@ -118,6 +120,13 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <script>
+    // Handle clicking on the ID column to navigate to user_details.php
+    function goToDetails(userId) {
+        // Redirect to user_details.php with the user ID as a query parameter
+        window.location.href = `user_details.php?user_id=${userId}`;
+    }
+
+    // Handle role filtering
     document.getElementById('role').addEventListener('change', function () {
         const role = this.value;
 
@@ -133,7 +142,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 users.forEach(user => {
                     const row = `
                         <tr>
-                            <td class="user-id">${user.user_id}</td>
+                            <td class="user-id" onclick="goToDetails(${user.user_id})">${user.user_id}</td>
                             <td>${user.name}</td>
                             <td>${user.address}</td>
                             <td>${user.gender}</td>
