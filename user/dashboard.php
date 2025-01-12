@@ -14,7 +14,7 @@ $query = "
     SELECT
         COUNT(*) AS total_count,
         SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) AS pending_count,
-        SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) AS in_progress_count,
+        SUM(CASE WHEN status = 'in progress' THEN 1 ELSE 0 END) AS in_progress_count,
         SUM(CASE WHEN status = 'resolved' THEN 1 ELSE 0 END) AS resolved_count,
         SUM(CASE WHEN status = 'escalated' THEN 1 ELSE 0 END) AS escalated_count
     FROM tickets

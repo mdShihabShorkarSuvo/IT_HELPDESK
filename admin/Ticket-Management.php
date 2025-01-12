@@ -41,7 +41,13 @@ if ($status_filter && $status_filter != 'all') {
 }
 
 // Sort tickets by priority and deadline
-$query .= " ORDER BY tickets.priority DESC, tickets.deadline DESC";
+$query .= " ORDER BY 
+    CASE 
+        WHEN tickets.priority = 'High' THEN 1
+        WHEN tickets.priority = 'Medium' THEN 2
+        WHEN tickets.priority = 'Low' THEN 3
+    END, tickets.deadline DESC";
+
 
 // Prepare the query
 $stmt = $pdo->prepare($query);

@@ -344,6 +344,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     assignedToInput.value = null; // Make sure the value is null when submitting the form
 });
 
+// Highlight the selected IT staff
+document.querySelectorAll('.it-staff td').forEach(td => {
+        td.addEventListener('click', function() {
+            // Remove the 'selected' class from all IT staff
+            document.querySelectorAll('.it-staff td').forEach(td => {
+                td.classList.remove('selected');
+            });
+
+            // Add the 'selected' class to the clicked IT staff
+            this.classList.add('selected');
+        });
+    });
 
 </script>
 
