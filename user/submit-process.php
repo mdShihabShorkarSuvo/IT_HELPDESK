@@ -49,7 +49,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("issss", $user_id, $category, $title, $description, $attachment);
 
 if ($stmt->execute()) {
-    header("Location: user_page.php");
+    header("Location: user_page.php?page=submit-ticket");
     exit();
 } else {
     echo "Error: " . $stmt->error;

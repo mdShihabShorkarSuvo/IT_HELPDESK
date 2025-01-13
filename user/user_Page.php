@@ -31,6 +31,7 @@ $_SESSION['user_id'] = $user['user_id'];
     <title>User Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="user.css">
+    
 </head>
 <body>
     <div class="dashboard">
@@ -56,23 +57,31 @@ $_SESSION['user_id'] = $user['user_id'];
             </div>
             <nav class="menu">
                 <ul>
-                    <li><a href="#" data-page="notifications" class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
-                    <li><a href="#" data-page="dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="#" data-page="submit-ticket" class="menu-item"><i class="fas fa-ticket-alt"></i> Submit Ticket</a></li>
-                    <li><a href="#" data-page="my-tickets" class="menu-item"><i class="fas fa-clipboard-list"></i> My Tickets</a></li>
-                    <li><a href="#" data-page="chat" class="menu-item"><i class="fas fa-comments"></i> Chat</a></li>
-                    <li><a href="#" data-page="calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                    <li><a href="?page=notifications" class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="user_page.php?page=dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="user_page.php?page=submit-ticket" class="menu-item"><i class="fas fa-ticket-alt"></i> Submit Ticket</a></li>
+                    <li><a href="user_page.php?page=my-tickets" class="menu-item"><i class="fas fa-clipboard-list"></i> My Tickets</a></li>
+                    <li><a href="user_page.php?page=chat" class="menu-item"><i class="fas fa-comments"></i> Chat</a></li>
+                    <li><a href="user_page.php?page=calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
                 </ul>
             </nav>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content" id="content">
-            <h1>Welcome to the User Dashboard</h1>
-            <p>Select an option from the menu to get started.</p>
+            <?php
+            $page = $_GET['page'] ?? 'dashboard';
+            $allowed_pages = ['notifications', 'dashboard', 'submit-ticket', 'my-tickets', 'chat', 'calendar'];
+            if (in_array($page, $allowed_pages)) {
+                include "$page.php";
+            } else {
+                echo "<h1>Welcome to the User Dashboard</h1>";
+                echo "<p>Select an option from the menu to get started.</p>";
+            }
+            ?>
         </main>
     </div>
-
     <script src="user.js"></script>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 // Start session and connect to the database
-session_start();
+//session_start();
 
 // Assuming user is logged in, and user_id is available
 $user_id = $_SESSION['user_id']; // Get the user_id from session
