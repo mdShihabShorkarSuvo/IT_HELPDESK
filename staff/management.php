@@ -234,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!-- Back Button -->
 <div style="text-align: center; margin-top: 20px;">
-    <a class="back-button" href="it_staff.php">Back</a>
+    <a class="back-button" href="it_staff.php?page=assigned_task">Back</a>
 </div>
 
 <div class="container">

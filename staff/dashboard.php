@@ -1,8 +1,5 @@
 <?php
-// Start session and connect to the database
-session_start();
 
-// Assuming user is logged in, and user_id is available
 $user_id = $_SESSION['user_id']; // Get the user_id from session
 
 // Database connection (replace with your actual database connection)
@@ -110,14 +107,14 @@ $escalatedTickets = $ticketCounts['escalated_count']; // New 'Escalated' status
         <!-- Card to show total tickets count -->
         <div class="card" style="background: linear-gradient(135deg, #4e5cba, #6e7bff);">
             <div class="icon">🎫</div>
-            <h3>Total Tickets</h3>
+            <h3>Total Task</h3>
             <p><?php echo $allTickets; ?></p>
         </div>
 
         <!-- Card to show pending tickets count -->
         <div class="card" style="background: linear-gradient(135deg, #ff7c7c, #ff3d3d);">
             <div class="icon">⏳</div>
-            <h3>Pending Tickets</h3>
+            <h3>Pending Task</h3>
             <p><?php echo $pendingTickets; ?></p>
         </div>
 
@@ -138,13 +135,13 @@ $escalatedTickets = $ticketCounts['escalated_count']; // New 'Escalated' status
         <!-- Card to show escalated tickets count -->
         <div class="card" style="background: linear-gradient(135deg, #ff7043, #e64a19);">
             <div class="icon">⚠️</div>
-            <h3>Escalated Tickets</h3>
+            <h3>Escalated Task</h3>
             <p><?php echo $escalatedTickets; ?></p>
         </div>
     </div>
 
     <!-- Pie Chart for ticket status distribution -->
-    <h3 style="text-align: center;">Ticket Status Distribution</h3>
+    <h3 style="text-align: center;">Task Status Distribution</h3>
     <div style="width: 80%; margin: 0 auto;">
         <canvas id="statusChart"></canvas>
     </div>

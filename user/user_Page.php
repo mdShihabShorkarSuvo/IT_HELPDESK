@@ -57,7 +57,7 @@ $_SESSION['user_id'] = $user['user_id'];
             </div>
             <nav class="menu">
                 <ul>
-                    <li><a href="?page=notifications" class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="user_page.php?page=notifications" class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
                     <li><a href="user_page.php?page=dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     <li><a href="user_page.php?page=submit-ticket" class="menu-item"><i class="fas fa-ticket-alt"></i> Submit Ticket</a></li>
                     <li><a href="user_page.php?page=my-tickets" class="menu-item"><i class="fas fa-clipboard-list"></i> My Tickets</a></li>

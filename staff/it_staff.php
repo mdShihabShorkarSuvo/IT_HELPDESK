@@ -56,22 +56,26 @@ $_SESSION['user_id'] = $user['user_id'];
             </div>
             <nav class="menu">
                 <ul>
-                    <li><a href="#" data-page="notifications" class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
-                    <li><a href="#" data-page="dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="#" data-page="assigned_task" class="menu-item"><i class="fas fa-ticket-alt"></i> Assigned Task</a></li>
-                    <li><a href="#" data-page="system-status" class="menu-item"><i class="fas fa-server"></i> System Status</a></li>
-                    <li><a href="#" data-page="network-monitoring" class="menu-item"><i class="fas fa-network-wired"></i> Network Monitoring</a></li>
-                    <li><a href="#" data-page="calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                    <li><a href="it_staff.php?page=notifications"  class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="it_staff.php?page=dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="it_staff.php?page=assigned_task"  class="menu-item"><i class="fas fa-ticket-alt"></i> Assigned Task</a></li>
+                    <li><a href="it_staff.php?page=calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
                 </ul>
             </nav>
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content">
-            <div id="content">
-                <h1>Welcome to the IT Staff Dashboard</h1>
-                <p>Select an option from the menu to see details.</p>
-            </div>
+        <main class="main-content" id="content">
+            <?php
+            $page = $_GET['page'] ?? 'dashboard';
+            $allowed_pages = ['notifications', 'dashboard', 'assigned_task', 'calendar'];
+            if (in_array($page, $allowed_pages)) {
+                include "$page.php";
+            } else {
+                echo "<h1>Welcome to the User Dashboard</h1>";
+                echo "<p>Select an option from the menu to get started.</p>";
+            }
+            ?>
         </main>
     </div>
 

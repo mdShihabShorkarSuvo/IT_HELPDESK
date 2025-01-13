@@ -1,5 +1,4 @@
 <?php
-session_start(); // Start the session
 
 // Database connection (replace with your actual database details)
 $pdo = new PDO('mysql:host=localhost;dbname=smart_it_helpdesk', 'root', ''); // Replace with actual DB details
@@ -46,7 +45,7 @@ $query .= " ORDER BY
         WHEN tickets.priority = 'High' THEN 1
         WHEN tickets.priority = 'Medium' THEN 2
         WHEN tickets.priority = 'Low' THEN 3
-    END, tickets.deadline DESC";
+    END, tickets.deadline ASC";
 
 
 // Prepare the query
@@ -135,7 +134,12 @@ table tbody tr:active {
 
     <!-- Filter Dropdown -->
     <div class="filter-buttons">
-        <form method="get" action="">
+        <?php
+        // Retain the 'page' parameter dynamically
+        $current_page = isset($_GET['page']) ? htmlspecialchars($_GET['page']) : '';
+        ?>
+        <form method="get" action="admin_page.php">
+            <input type="hidden" name="page" value="<?php echo $current_page; ?>">
             <select name="status" onchange="this.form.submit()">
                 <option value="all" <?php echo ($status_filter == 'all') ? 'selected' : ''; ?>>All Status</option>
                 <option value="Pending" <?php echo ($status_filter == 'Pending') ? 'selected' : ''; ?>>Pending</option>

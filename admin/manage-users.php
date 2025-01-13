@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -29,54 +29,60 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            margin-bottom: 1rem;
-        }
-
-        table {
+       table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-
+        table, th, td {
+            border: 1px solid black;
+        }
         th, td {
-            padding: 10px;
+            padding: 8px 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
         }
-
-        th {
-            background-color: #f2f2f2;
+        .filter-buttons {
+            margin-bottom: 20px;
         }
-
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        .user-id {
-            color: blue;
-            text-decoration: underline;
+        .filter-buttons select, .filter-buttons button {
+            padding: 8px 12px;
+            margin-right: 10px;
             cursor: pointer;
         }
 
-        select {
-            padding: 8px;
-            margin-bottom: 20px;
-        }
+
+        /* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+}
+
+/* Make table rows clickable */
+table tbody tr {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Change background color when hovering over rows */
+table tbody tr:hover {
+    background-color:rgb(38, 196, 56); /* Light gray background on hover */
+}
+
+/* Optional: Highlight the row when clicked */
+table tbody tr:active {
+    background-color: #d3d3d3; /* Slightly darker gray when clicked */
+}
+
     </style>
 </head>
 <body>
@@ -95,21 +101,20 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Address</th>
-            <th>Gender</th>
             <th>Email</th>
+            <th>Gender</th>
             <th>Role</th>
         </tr>
         </thead>
         <tbody>
         <!-- Display all users initially -->
         <?php foreach ($users as $user): ?>
-            <tr>
+            <tr onclick="window.location.href='user_update.php?id=<?php echo $user['user_id']; ?>'">
+
                 <td class="user-id"><?php echo htmlspecialchars($user['user_id']); ?></td>
                 <td><?php echo htmlspecialchars($user['name']); ?></td>
-                <td><?php echo htmlspecialchars($user['address']); ?></td>
-                <td><?php echo htmlspecialchars($user['gender']); ?></td>
                 <td><?php echo htmlspecialchars($user['email']); ?></td>
+                <td><?php echo htmlspecialchars($user['gender']); ?></td>
                 <td><?php echo htmlspecialchars($user['role']); ?></td>
             </tr>
         <?php endforeach; ?>
@@ -117,35 +122,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </table>
 </div>
 
-<script>
-    document.getElementById('role').addEventListener('change', function () {
-        const role = this.value;
 
-        // Create an AJAX request
-        fetch(`fetch_users.php?role=${role}`)
-            .then(response => response.json())
-            .then(users => {
-                // Clear the table body
-                const tbody = document.querySelector('#usersTable tbody');
-                tbody.innerHTML = '';
-
-                // Populate the table with filtered users
-                users.forEach(user => {
-                    const row = `
-                        <tr>
-                            <td class="user-id">${user.user_id}</td>
-                            <td>${user.name}</td>
-                            <td>${user.address}</td>
-                            <td>${user.gender}</td>
-                            <td>${user.email}</td>
-                            <td>${user.role}</td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                });
-            })
-            .catch(error => console.error('Error:', error));
-    });
-</script>
 </body>
 </html>

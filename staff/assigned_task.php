@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session
+
 
 // Check if the user is logged in and is an IT staff
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'it_staff') {
@@ -54,7 +54,7 @@ $query .= " ORDER BY
         WHEN tickets.priority = 'High' THEN 1
         WHEN tickets.priority = 'Medium' THEN 2
         WHEN tickets.priority = 'Low' THEN 3
-    END, tickets.deadline DESC";
+    END, tickets.deadline ASC";
 
 // Prepare the query
 $stmt = $pdo->prepare($query);
@@ -140,7 +140,12 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Filter Dropdown -->
     <div class="filter-buttons">
-        <form method="get" action="">
+        <?php
+        // Retain the 'page' parameter dynamically
+        $current_page = isset($_GET['page']) ? htmlspecialchars($_GET['page']) : '';
+        ?>
+        <form method="get" action="it_staff.php">
+            <input type="hidden" name="page" value="<?php echo $current_page; ?>">
             <select name="status" onchange="this.form.submit()">
                 <option value="all" <?php echo ($status_filter == 'all') ? 'selected' : ''; ?>>All Status</option>
                 <option value="Pending" <?php echo ($status_filter == 'Pending') ? 'selected' : ''; ?>>Pending</option>

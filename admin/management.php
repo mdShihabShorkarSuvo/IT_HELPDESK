@@ -231,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!-- Back Button -->
 <div style="text-align: center; margin-top: 20px;">
-    <button class="back-button" onclick="window.location.href='admin_page.php';">Back</button>
+    <button class="back-button" onclick="window.location.href='admin_page.php?page=Ticket-Management';">Back</button>
 </div>
 
 <div class="container">
