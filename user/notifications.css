@@ -1,0 +1,82 @@
+/* notifications.css */
+
+/* Styles for the notification container */
+.notification-container {
+    width: 80%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.notification {
+    background-color: #f9f9f9;
+    border-left: 5px solid #4CAF50;
+    margin-bottom: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Hide the notification */
+.notification.hide {
+    display: none;  /* Hides the notification from the page */
+}
+
+/* Styles for the notification header */
+.notification-header {
+    font-size: 20px;  /* Slightly larger font size for better emphasis */
+    font-weight: bold;
+    color: #4CAF50;  /* Green color to match the notification theme */
+    padding-bottom: 5px;
+    border-bottom: 2px solid #4CAF50;  /* Green underline to separate from message */
+    margin-bottom: 10px;  /* Space below the header */
+}
+
+/* Styles for the notification message */
+.notification-message {
+    margin: 10px 0;
+}
+
+.notification-time-container {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+}
+
+.notification-time {
+    display: block;
+}
+
+.hide-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 3px;
+    float: right;
+}
+
+.hide-btn:hover {
+    background-color: #d32f2f;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* Style for the Notification Heading */
+.notification-heading {
+    font-size: 24px; /* Larger font size for the heading */
+    font-weight: bold; /* Bold text for emphasis */
+    color: #4CAF50; /* Green color for a positive tone */
+    text-align: center; /* Center align the heading */
+    padding: 15px 0; /* Vertical padding for spacing */
+    margin-bottom: 20px; /* Bottom margin to separate from notifications */
+    border-bottom: 2px solid #4CAF50; /* Green border under the heading */
+    background-color: #f4f4f4; /* Light background for contrast */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+}
