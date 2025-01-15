@@ -46,12 +46,16 @@ $_SESSION['user_id'] = $user['user_id'];
                 <div class="profile-dropdown">
                 <div class="profile-info">
                     <img src="<?php echo htmlspecialchars($profile_picture); ?>" id="profile-img" alt="Profile" onerror="this.src='../images/user.png';">
-                    <span id="profile-name"><?php echo htmlspecialchars($user_name); ?></span> <!-- Display the user's name -->
+                    <span id="profile-name" style="text-align: center; display: block; margin-left: 20px; color: orange; font-size: 20px;"><?php echo htmlspecialchars($user_name); ?></span> <!-- Display the user's name -->
+<!-- Display the user's name -->
+                    <!-- Display the user's name -->
                     
                 </div>
                     <div id="profile-options" class="dropdown-content">
-                        <a href="#" id="edit-profile">Edit Profile</a>
-                        <a href="#" id="logout">Logout</a>
+                    <a href="#" id="edit-profile" style="display: block; text-align: center; margin: 0 auto;">Edit Profile</a>
+
+                    <a href="#" id="logout" style="display: block; text-align: center; margin: 0 auto;">Logout</a>
+
                     </div>
                 </div>
             </div>

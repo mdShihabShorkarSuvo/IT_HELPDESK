@@ -1,5 +1,4 @@
 <?php
-
 // Database connection (replace with your actual database details)
 $pdo = new PDO('mysql:host=localhost;dbname=smart_it_helpdesk', 'root', ''); // Replace with actual DB details
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -47,7 +46,6 @@ $query .= " ORDER BY
         WHEN tickets.priority = 'Low' THEN 3
     END, tickets.deadline ASC";
 
-
 // Prepare the query
 $stmt = $pdo->prepare($query);
 
@@ -70,63 +68,92 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Tickets</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
         }
-        table, th, td {
-            border: 1px solid black;
+
+        h1 {
+            text-align: center;
+            color: #343a40;
         }
-        th, td {
-            padding: 8px 12px;
-            text-align: left;
-        }
+
         .filter-buttons {
             margin-bottom: 20px;
+            text-align: left;
         }
-        .filter-buttons select, .filter-buttons button {
-            padding: 8px 12px;
-            margin-right: 10px;
+
+        .filter-buttons select {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
             cursor: pointer;
         }
 
+        .table-container {
+            margin-top: 20px;
+            max-height: 400px; /* Adjust height as needed */
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+        }
 
-        /* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            table-layout: fixed;
+        }
 
-table, th, td {
-    border: 1px solid black;
-}
+        th {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
 
-th, td {
-    padding: 8px 12px;
-    text-align: left;
-}
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            word-wrap: break-word;
+        }
 
-/* Make table rows clickable */
-table tbody tr {
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
-}
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-/* Change background color when hovering over rows */
-table tbody tr:hover {
-    background-color:rgb(38, 196, 56); /* Light gray background on hover */
-}
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
 
-/* Optional: Highlight the row when clicked */
-table tbody tr:active {
-    background-color: #d3d3d3; /* Slightly darker gray when clicked */
-}
+        tbody tr:active {
+            background-color: #d3d3d3;
+        }
 
+        /* For better scrolling visuals */
+        .table-container::-webkit-scrollbar {
+            width: 12px;
+        }
 
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
 
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 6px;
+        }
 
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     </style>
 </head>
 <body>
@@ -135,7 +162,6 @@ table tbody tr:active {
     <!-- Filter Dropdown -->
     <div class="filter-buttons">
         <?php
-        // Retain the 'page' parameter dynamically
         $current_page = isset($_GET['page']) ? htmlspecialchars($_GET['page']) : '';
         ?>
         <form method="get" action="admin_page.php">
@@ -149,43 +175,45 @@ table tbody tr:active {
         </form>
     </div>
 
-    <?php if (empty($tickets)): ?>
-        <p>No tickets found for the selected status.</p>
-    <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Ticket ID</th>
-                    <th>User Name</th>
-                    <th>User Email</th>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Priority</th>
-                    <th>Status</th>
-                    <th>Deadline</th>
-                    <th>Assigned To</th>
-                    <th>IT Staff ID</th>
-                    <th>IT Staff Email</th>
-                </tr>
-            </thead>
-            <tbody>
-        <?php foreach ($tickets as $ticket): ?>
-            <tr onclick="window.location.href='management.php?ticket_id=<?php echo $ticket['ticket_id']; ?>'">
-                <td><?php echo htmlspecialchars($ticket['ticket_id']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['user_name']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['user_email']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['category']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['title']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['priority']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['status']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['deadline']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['it_staff_name']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['assigned_to']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['it_staff_email']); ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-        </table>
-    <?php endif; ?>
+    <div class="table-container">
+        <?php if (empty($tickets)): ?>
+            <p>No tickets found for the selected status.</p>
+        <?php else: ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ticket ID</th>
+                        <th>User Name</th>
+                        <th>User Email</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Deadline</th>
+                        <th>Assigned To</th>
+                        <th>IT Staff ID</th>
+                        <th>IT Staff Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($tickets as $ticket): ?>
+                        <tr onclick="window.location.href='management.php?ticket_id=<?php echo $ticket['ticket_id']; ?>'">
+                            <td><?php echo htmlspecialchars($ticket['ticket_id']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['user_name']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['user_email']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['category']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['title']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['priority']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['status']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['deadline']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['it_staff_name']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['assigned_to']); ?></td>
+                            <td><?php echo htmlspecialchars($ticket['it_staff_email']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </div>
 </body>
 </html>

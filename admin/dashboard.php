@@ -137,47 +137,49 @@ $escalatedTickets = $ticketCounts['escalated_count']; // New 'Escalated' status
 </head>
 <body>
 
-    <h1>Admin Dashboard</h1>
+<h1 style="color: black; font-size: 36px;">Admin Dashboard</h1>
+
 
     <div class="dashboard">
         <!-- Card to show total tickets count -->
         <div class="card total">
             <div class="icon">🎫</div>
-            <h3>Total Tickets</h3>
+            <h2>Total Tickets</h2>
             <p><?php echo $allTickets; ?></p>
         </div>
 
         <!-- Card to show pending tickets count -->
         <div class="card pending">
             <div class="icon">⏳</div>
-            <h3>Pending Tickets</h3>
+            <h2>Pending Tickets</h2>
             <p><?php echo $pendingTickets; ?></p>
         </div>
 
         <!-- Card to show in-progress tickets count -->
         <div class="card in-progress">
             <div class="icon">⚙️</div>
-            <h3>In Progress</h3>
+            <h2>In Progress</h2>
             <p><?php echo $inProgressTickets; ?></p>
         </div>
 
         <!-- Card to show resolved tickets count -->
         <div class="card resolved">
             <div class="icon">✅</div>
-            <h3>Resolved</h3>
+            <h2>Resolved</h2>
             <p><?php echo $resolvedTickets; ?></p>
         </div>
 
         <!-- Card to show escalated tickets count -->
         <div class="card escalated">
             <div class="icon">⚠️</div>
-            <h3>Escalated Tickets</h3>
+            <h2>Escalated Tickets</h2>
             <p><?php echo $escalatedTickets; ?></p>
         </div>
     </div>
 
     <!-- Pie Chart for ticket status distribution -->
-    <h3>Ticket Status Distribution</h3>
+    <h3 style="color: black; font-size: 22px;">Ticket Status Distribution</h3>
+
     <div class="chart-container">
         <canvas id="statusChart"></canvas>
     </div>

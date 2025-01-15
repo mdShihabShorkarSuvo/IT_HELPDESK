@@ -81,59 +81,92 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assigned Tasks</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px 12px;
-            text-align: left;
-        }
-        .filter-buttons {
-            margin-bottom: 20px;
-        }
-        .filter-buttons select, .filter-buttons button {
-            padding: 8px 12px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f8f9fc;
+    }
 
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+    h1 {
+        text-align: center;
+        color: #4e73df;
+    }
 
-        table, th, td {
-            border: 1px solid black;
-        }
+    .filter-buttons {
+        margin-bottom: 20px;
+        text-align: center;
+    }
 
-        th, td {
-            padding: 8px 12px;
-            text-align: left;
-        }
+    .filter-buttons select {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+    }
 
-        /* Make table rows clickable */
-        table tbody tr {
-            cursor: pointer; /* Change cursor to pointer on hover */
-            transition: background-color 0.3s ease; /* Smooth transition for background color */
-        }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
 
-        /* Change background color when hovering over rows */
-        table tbody tr:hover {
-            background-color:rgb(38, 196, 56); /* Light gray background on hover */
-        }
+    table thead {
+        background-color: #4e73df;
+        color: white;
+    }
 
-        /* Optional: Highlight the row when clicked */
-        table tbody tr:active {
-            background-color: #d3d3d3; /* Slightly darker gray when clicked */
-        }
-    </style>
+    table thead th {
+        padding: 12px 15px;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    table tbody tr {
+        transition: background-color 0.3s ease;
+    }
+
+    table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table tbody tr:hover {
+        background-color: #d1e7dd;
+    }
+
+    table tbody tr td {
+        padding: 12px 15px;
+        font-size: 14px;
+        text-align: left; /* Default left alignment */
+    }
+
+    table tbody tr td.priority-high {
+        color: #e74a3b;
+        font-weight: bold;
+    }
+
+    table tbody tr td.priority-medium {
+        color: #f6c23e;
+    }
+
+    table tbody tr td.priority-low {
+        color: #1cc88a;
+    }
+
+    .filter-buttons {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+</style>
+
+
 </head>
 <body>
     <h1>Assigned Tasks</h1>
@@ -175,15 +208,16 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tbody>
         <?php foreach ($tickets as $ticket): ?>
             <tr onclick="window.location.href='management.php?ticket_id=<?php echo $ticket['ticket_id']; ?>'">
-                <td><?php echo htmlspecialchars($ticket['ticket_id']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['user_name']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['user_email']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['category']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['title']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['priority']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['status']); ?></td>
-                <td><?php echo htmlspecialchars($ticket['deadline']); ?></td>
-            </tr>
+    <td><?php echo htmlspecialchars($ticket['ticket_id']); ?></td>
+    <td><?php echo htmlspecialchars($ticket['user_name']); ?></td>
+    <td><?php echo htmlspecialchars($ticket['user_email']); ?></td>
+    <td><?php echo htmlspecialchars($ticket['category']); ?></td>
+    <td><?php echo htmlspecialchars($ticket['title']); ?></td>
+    <td><?php echo htmlspecialchars($ticket['priority']); ?></td>
+    <td class="status"><?php echo htmlspecialchars($ticket['status']); ?></td>
+    <td><?php echo htmlspecialchars($ticket['deadline']); ?></td>
+</tr>
+
         <?php endforeach; ?>
     </tbody>
         </table>

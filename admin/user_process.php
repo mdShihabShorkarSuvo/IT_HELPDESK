@@ -100,6 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     echo "User updated successfully!";
-    //header("Location: user_update.php?id=" . urlencode($user_id));
+    header("Location: user_update.php?id=" . urlencode($user_id));
     exit;
 }

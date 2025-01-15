@@ -118,7 +118,7 @@
 </head>
 <body>
 <div id="message"></div> 
-    <div class="container">
+    
         <h1>IT Support Dashboard</h1>
 
         <!-- The form is now always visible -->
@@ -154,7 +154,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    
 </body>
 </html>
 
