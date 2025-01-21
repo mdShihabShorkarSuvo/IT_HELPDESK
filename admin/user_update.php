@@ -42,60 +42,7 @@ if (!$user) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update User</title>
-    <style>
-        form {
-            max-width: 700px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background: #f9f9f9;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .profile-image {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .cancel-button:hover {
-            background-color: #e53935;}
-
-            .cancel-button {
-            background-color:rgb(66, 63, 63);}
-
-
-            .button-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px; /* Adds space between the buttons */
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="css/user_update.css">
 </head>
 <body>
 

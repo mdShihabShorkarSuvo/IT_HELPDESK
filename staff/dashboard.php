@@ -6,7 +6,7 @@ $user_id = $_SESSION['user_id']; // Get the user_id from session
 $pdo = new PDO('mysql:host=localhost;dbname=smart_it_helpdesk', 'root', ''); // Replace with actual DB details
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Query to get the count of tickets for all statuses, including 'Escalated'
+// This SQL query counts the total tickets and their statuses , including 'Escalated'
 $query = "
     SELECT
         COUNT(*) AS total_count,

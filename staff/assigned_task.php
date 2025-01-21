@@ -1,5 +1,7 @@
 <?php
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Check if the user is logged in and is an IT staff
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'it_staff') {
@@ -15,9 +17,11 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // Default status filter is 'all'
 $status_filter = 'all';
 
-// Check if a status filter is set via GET parameters
+// Check if a status filter is set via GET or POST parameters
 if (isset($_GET['status'])) {
     $status_filter = $_GET['status'];
+} elseif (isset($_POST['status'])) {
+    $status_filter = $_POST['status'];
 }
 
 // SQL query to fetch tickets assigned to the logged-in IT staff
@@ -72,6 +76,13 @@ $stmt->execute();
 
 // Fetch the tickets
 $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Check if the request is an AJAX request
+if (isset($_POST['ajax']) && $_POST['ajax'] == 'true') {
+    // Return the tickets as JSON
+    echo json_encode($tickets);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,6 +92,45 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assigned Tasks</title>
     <link rel="stylesheet" href="css/assigned_task.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle the filter change
+            $('select[name="status"]').change(function() {
+                var status = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'assigned_task.php',
+                    data: {
+                        status: status,
+                        ajax: 'true'
+                    },
+                    success: function(response) {
+                        var tickets = JSON.parse(response);
+                        var tbody = $('table tbody');
+                        tbody.empty();
+                        if (tickets.length === 0) {
+                            tbody.append('<tr><td colspan="8">No tickets found for the selected status.</td></tr>');
+                        } else {
+                            $.each(tickets, function(index, ticket) {
+                                var row = '<tr onclick="window.location.href=\'management.php?ticket_id=' + ticket.ticket_id + '\'">' +
+                                    '<td>' + ticket.ticket_id + '</td>' +
+                                    '<td>' + ticket.user_name + '</td>' +
+                                    '<td>' + ticket.user_email + '</td>' +
+                                    '<td>' + ticket.category + '</td>' +
+                                    '<td>' + ticket.title + '</td>' +
+                                    '<td>' + ticket.priority + '</td>' +
+                                    '<td class="status">' + ticket.status + '</td>' +
+                                    '<td>' + ticket.deadline + '</td>' +
+                                    '</tr>';
+                                tbody.append(row);
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <h1>Assigned Tasks</h1>
@@ -93,7 +143,7 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <form method="get" action="it_staff.php">
             <input type="hidden" name="page" value="<?php echo $current_page; ?>">
-            <select name="status" onchange="this.form.submit()">
+            <select name="status">
                 <option value="all" <?php echo ($status_filter == 'all') ? 'selected' : ''; ?>>All Status</option>
                 <option value="Pending" <?php echo ($status_filter == 'Pending') ? 'selected' : ''; ?>>Pending</option>
                 <option value="In Progress" <?php echo ($status_filter == 'In Progress') ? 'selected' : ''; ?>>In Progress</option>
@@ -116,24 +166,22 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Priority</th>
                     <th>Status</th>
                     <th>Deadline</th>
-                   
                 </tr>
             </thead>
             <tbody>
-        <?php foreach ($tickets as $ticket): ?>
-            <tr onclick="window.location.href='management.php?ticket_id=<?php echo $ticket['ticket_id']; ?>'">
-    <td><?php echo htmlspecialchars($ticket['ticket_id']); ?></td>
-    <td><?php echo htmlspecialchars($ticket['user_name']); ?></td>
-    <td><?php echo htmlspecialchars($ticket['user_email']); ?></td>
-    <td><?php echo htmlspecialchars($ticket['category']); ?></td>
-    <td><?php echo htmlspecialchars($ticket['title']); ?></td>
-    <td><?php echo htmlspecialchars($ticket['priority']); ?></td>
-    <td class="status"><?php echo htmlspecialchars($ticket['status']); ?></td>
-    <td><?php echo htmlspecialchars($ticket['deadline']); ?></td>
-</tr>
-
-        <?php endforeach; ?>
-    </tbody>
+                <?php foreach ($tickets as $ticket): ?>
+                    <tr onclick="window.location.href='management.php?ticket_id=<?php echo $ticket['ticket_id']; ?>'">
+                        <td><?php echo htmlspecialchars($ticket['ticket_id']); ?></td>
+                        <td><?php echo htmlspecialchars($ticket['user_name']); ?></td>
+                        <td><?php echo htmlspecialchars($ticket['user_email']); ?></td>
+                        <td><?php echo htmlspecialchars($ticket['category']); ?></td>
+                        <td><?php echo htmlspecialchars($ticket['title']); ?></td>
+                        <td><?php echo htmlspecialchars($ticket['priority']); ?></td>
+                        <td class="status"><?php echo htmlspecialchars($ticket['status']); ?></td>
+                        <td><?php echo htmlspecialchars($ticket['deadline']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
         </table>
     <?php endif; ?>
 </body>
