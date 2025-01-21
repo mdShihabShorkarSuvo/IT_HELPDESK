@@ -1,59 +1,111 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Page Title */
 h1 {
+    font-size: 32px;
+    color: #333;
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Filter Section */
+.filter-buttons {
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    margin-bottom: 20px;
+    padding-left: 5%;
+}
+
+.filter-buttons select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Table Container */
+.table-container {
+    max-width: 90%;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    font-size: 18px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-button {
-    background-color: #4CAF50;
+thead {
+    background-color: #007bff;
     color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
 }
 
-button:hover {
-    background-color: #45a049;
+thead th {
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    background: #f9f9f9;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Alternating row colors */
+tbody tr:nth-child(even) {
+    background: #f1f1f1;
+}
+
+/* Table cell styling */
+tbody td {
+    padding: 15px;
+    color: #333;
+}
+
+/* Hover effect on rows */
+tbody tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 26px;
+    }
+
+    .table-container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: 16px;
+    }
+
+    thead th, tbody td {
+        padding: 10px;
+    }
+
+    .filter-buttons {
+        padding-left: 0;
+    }
+
+    .filter-buttons select {
+        font-size: 14px;
+        padding: 8px;
+    }
 }

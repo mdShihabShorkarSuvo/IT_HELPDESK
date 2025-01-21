@@ -68,8 +68,8 @@ $_SESSION['user_id'] = $user['user_id'];
                     <li><a href="it_staff.php?page=notifications"  class="menu-item"><i class="fas fa-bell"></i> Notifications</a></li>
                     <li><a href="it_staff.php?page=dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     <li><a href="it_staff.php?page=assigned_task"  class="menu-item"><i class="fas fa-ticket-alt"></i> Assigned Task</a></li>
+                    <li><a href="it_staff.php?page=User-Feedback" class="menu-item"><i class="fas fa-comments"></i> User Feedback</a></li>
                     <li><a href="it_staff.php?page=calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
-                    <li><a href="it_staff.php?page=User-Feedback" class="menu-item"><i class="fas fa-calendar-alt"></i>User Feedback</a></li>
                 </ul>
             </nav>
         </aside>
