@@ -68,6 +68,8 @@ $_SESSION['user_id'] = $user['user_id']
                     <li><a href="admin_page.php?page=manage-users"  class="menu-item"><i class="fas fa-users"></i> Manage Users</a></li>
                     <li><a href="admin_page.php?page=Ticket-Management"  class="menu-item"><i class="fas fa-file-alt"></i> Ticket Management</a></li>
                     <li><a href="admin_page.php?page=calendar"  class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                    <li><a href="admin_page.php?page=View-Feedback"  class="menu-item"><i class="fas fa-calendar-alt"></i> View-Feedback</a></li>
+
                 </ul>
             </nav>
         </aside>
@@ -76,7 +78,7 @@ $_SESSION['user_id'] = $user['user_id']
         <main class="main-content" id="content">
             <?php
             $page = $_GET['page'] ?? 'dashboard';
-            $allowed_pages = ['notifications', 'dashboard', 'manage-users', 'Ticket-Management', 'calendar'];
+            $allowed_pages = ['notifications', 'dashboard', 'manage-users', 'Ticket-Management', 'calendar','View-Feedback'];
             if (in_array($page, $allowed_pages)) {
                 include "$page.php";
             } else {

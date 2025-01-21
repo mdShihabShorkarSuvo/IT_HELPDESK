@@ -87,16 +87,7 @@ $_SESSION['user_id'] = $user['user_id'];
             $page = $_GET['page'] ?? 'dashboard';
             $allowed_pages = ['notifications', 'dashboard', 'submit-ticket', 'my-tickets', 'Rating', 'calendar'];
             if (in_array($page, $allowed_pages)) {
-                if ($page === 'Rating') {
-                    if (file_exists("$page.php")) {
-                        include "$page.php";
-                    } else {
-                        echo "<h1>Rating Page Not Found</h1>";
-                        echo "<p>The requested page could not be found.</p>";
-                    }
-                } else {
-                    include "$page.php";
-                }
+                include "$page.php";
             } else {
                 echo "<h1>Welcome to the User Dashboard</h1>";
                 echo "<p>Select an option from the menu to get started.</p>";

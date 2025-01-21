@@ -26,8 +26,8 @@ document.getElementById('signupForm').onsubmit = function(event) {
     }
 
     // Password Validation
-    if (password.length < 6) {
-        document.getElementById('password-error').innerText = "Password must be at least 6 characters.";
+    if (password.length < 8) {
+        document.getElementById('password-error').innerText = "Password must be at least 8 characters.";
         valid = false;
     }
 
@@ -50,11 +50,41 @@ document.getElementById('signupForm').onsubmit = function(event) {
         valid = false;
     }
 
-    // Form Submission if Validation Passes
-    if (!valid) {
-        event.preventDefault();  // Stop submission if invalid
-    } else {
-        alert("Form submitted successfully!");
-        // Form will proceed to process.php
+    // AJAX Email Validation
+    if (valid) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'check_email.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        let response = xhr.responseText.trim();
+        let emailError = document.getElementById('email-error');
+        let valid = true;
+
+        if (response === 'exists') {
+            emailError.innerText = "Email is already registered.";
+            emailError.style.color = 'red';
+            valid = false;
+        } else {
+            emailError.innerText = "";
+        }
+
+        // Proceed with form submission if email is valid
+        if (valid) {
+            document.getElementById('signupForm').submit(); // Submit the form
+        } else {
+            event.preventDefault(); // Stop form submission if email is invalid
+        }
     }
+};
+
+xhr.send('email=' + encodeURIComponent(email));
+
+// Prevent form from being submitted until AJAX completes
+event.preventDefault();
+} else {
+// Prevent form submission if validation fails
+event.preventDefault();
+}
 };

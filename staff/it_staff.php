@@ -69,6 +69,7 @@ $_SESSION['user_id'] = $user['user_id'];
                     <li><a href="it_staff.php?page=dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     <li><a href="it_staff.php?page=assigned_task"  class="menu-item"><i class="fas fa-ticket-alt"></i> Assigned Task</a></li>
                     <li><a href="it_staff.php?page=calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                    <li><a href="it_staff.php?page=User-Feedback" class="menu-item"><i class="fas fa-calendar-alt"></i>User Feedback</a></li>
                 </ul>
             </nav>
         </aside>
@@ -77,7 +78,7 @@ $_SESSION['user_id'] = $user['user_id'];
         <main class="main-content" id="content">
             <?php
             $page = $_GET['page'] ?? 'dashboard';
-            $allowed_pages = ['notifications', 'dashboard', 'assigned_task', 'calendar'];
+            $allowed_pages = ['notifications', 'dashboard', 'assigned_task', 'calendar','User-Feedback'];
             if (in_array($page, $allowed_pages)) {
                 include "$page.php";
             } else {
