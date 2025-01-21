@@ -2,35 +2,38 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+ 
 // Check if the user is logged in and has the role of 'user'
 if ($_SESSION['role'] !== 'user') {
     header("Location: ../login.php");  // Redirect to login page if not authorized
     exit();
 }
-
+ 
 include '../db.php'; // Database connection
-
+ 
 $user_email = $_SESSION['email'];
-
+ 
 // Query to fetch resolved tickets for the logged-in user
 $sql = "SELECT ticket_id, title FROM tickets WHERE user_id = ? AND status = 'Resolved'";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $_SESSION['user_id']);
 $stmt->execute();
 $result = $stmt->get_result();
-
+ 
 // Handle form submission and set a session flag
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ticket_id = $_POST['ticket_id'];
-    $rating = $_POST['rating'];
+    $rating = $_POST['rating']; // Rating sent by user
     $review = $_POST['review'];
-
-    // Insert the rating into the ticket_ratings table
+    
+    // Reverse the rating logic
+    $reversed_rating = 6 - $rating; // Reverse the rating (1 becomes 5, 2 becomes 4, etc.)
+ 
+    // Insert the reversed rating into the ticket_ratings table
     $insert_sql = "INSERT INTO ticket_ratings (ticket_id, user_id, rating, review) VALUES (?, ?, ?, ?)";
     $insert_stmt = $conn->prepare($insert_sql);
-    $insert_stmt->bind_param("iiis", $ticket_id, $_SESSION['user_id'], $rating, $review);
-
+    $insert_stmt->bind_param("iiis", $ticket_id, $_SESSION['user_id'], $reversed_rating, $review);
+ 
     if ($insert_stmt->execute()) {
         // Set session flag to mark the ticket as rated
         $_SESSION['rated_tickets'][$ticket_id] = true; // Store the rated ticket in session
@@ -40,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,9 +62,9 @@ function hideForm(ticket_id) {
 </head>
 <body>
     <h1>All Resolved Tickets</h1>
-
+ 
     <div id="message" style="display: none; color: green; font-weight: bold;"></div>
-
+ 
     <?php
     // Loop through resolved tickets and display rating form
     if ($result->num_rows > 0) {
@@ -75,21 +78,20 @@ function hideForm(ticket_id) {
         <form method="POST" action="" class="rating-form" id="ticket-form-<?= $ticket['ticket_id'] ?>">
             <!-- Hidden input to send ticket ID -->
             <input type="hidden" name="ticket_id" value="<?= htmlspecialchars($ticket['ticket_id']) ?>">
-
+ 
             <!-- Ticket Title -->
             <label for="rating"><?= htmlspecialchars($ticket['title']) ?></label>
-
-            <!-- Star Rating System -->
+ 
             <div class="star-rating">
-                <?php for ($i = 1; $i <= 5; $i++): ?>
-                    <input type="radio" id="star<?= $i . '-' . $ticket['ticket_id'] ?>" name="rating" value="<?= $i ?>" required>
-                    <label for="star<?= $i . '-' . $ticket['ticket_id'] ?>" title="<?= $i ?> stars">&#9733;</label>
-                <?php endfor; ?>
-            </div>
+    <?php for ($i = 1; $i <= 5; $i++): ?>
+        <input type="radio" id="star<?= $i . '-' . $ticket['ticket_id'] ?>" name="rating" value="<?= $i ?>" required>
+        <label for="star<?= $i . '-' . $ticket['ticket_id'] ?>" title="<?= $i ?> stars">&#9733;</label>
+    <?php endfor; ?>
+</div>
 
             <!-- Review Textarea -->
             <textarea name="review" placeholder="Write your review here" rows="4" required></textarea>
-
+ 
             <!-- Submit Button -->
             <button type="submit" class="submit-btn">Submit Rating</button>
         </form>
