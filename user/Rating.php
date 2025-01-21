@@ -12,6 +12,7 @@ if ($_SESSION['role'] !== 'user') {
 include '../db.php'; // Database connection
 
 $user_email = $_SESSION['email'];
+//
 
 // Query to fetch resolved tickets for the logged-in user
 $sql = "SELECT ticket_id, title FROM tickets WHERE user_id = ? AND status = 'Resolved'";
