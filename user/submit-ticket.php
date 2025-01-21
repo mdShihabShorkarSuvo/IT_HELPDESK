@@ -18,7 +18,6 @@
             background-color: #f4f5f7;
             color: #333;
             overflow-x: hidden;
-          
         }
 
         .container {
@@ -69,7 +68,6 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
-
         }
 
         textarea {
@@ -91,7 +89,6 @@
             background-color: #375a7f;
         }
 
-         
         #message {
             display: none;
             padding: 10px;
@@ -100,61 +97,78 @@
             font-size: 16px;
             text-align: center;
         }
+
         #message.success {
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
+
         #message.error {
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
 
-
     </style>
-
-
 </head>
 <body>
 <div id="message"></div> 
-    
-        <h1>IT Support Dashboard</h1>
 
-        <!-- The form is now always visible -->
-        <div class="form-container" id="ticketForm">
-            <form action="submit-process.php" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="category" >Category:</label>
-                    <select id="category" name="category" required>
-                        <option value="">Choose one</option>
-                        <option value="Hardware">Hardware</option>
-                        <option value="Software">Software</option>
-                        <option value="Network">Network Problems</option>
-                    </select>
-                </div>
+    <h1>IT Support Dashboard</h1>
 
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" placeholder="Enter the title of your request" required>
-                </div>
+    <!-- The form is now always visible -->
+    <div class="form-container" id="ticketForm">
+        <form action="submit-process.php" method="post" enctype="multipart/form-data">
+            
+            <!-- Room No -->
+            <div class="form-group">
+                <label for="roomNo">Room No:</label>
+                <input type="text" id="roomNo" name="roomNo" placeholder="Enter your room number" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="description">Request Details:</label>
-                    <textarea id="description" name="description" rows="5" placeholder="How can we help?" required></textarea>
-                </div>
+            <!-- PC No -->
+            <div class="form-group">
+                <label for="pcNo">PC No:</label>
+                <input type="text" id="pcNo" name="pcNo" placeholder="Enter your PC number" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="attachment">Attachment:</label>
-                    <input type="file" id="attachment" name="attachment">
-                </div>
+            <!-- Category -->
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="">Choose one</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Network">Network Problems</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn-submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" placeholder="Enter the title of your request" required>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Request Details:</label>
+                <textarea id="description" name="description" rows="5" placeholder="How can we help?" required></textarea>
+            </div>
+
+            <!-- Attachment -->
+            <div class="form-group">
+                <label for="attachment">Attachment:</label>
+                <input type="file" id="attachment" name="attachment">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>
 

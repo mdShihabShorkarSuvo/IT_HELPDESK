@@ -6,12 +6,12 @@ if (!isset($_SESSION['user_id'])) {
     die('User not logged in!');
 }
 
-// Check if ticket_id is set in the POST request
-if (!isset($_POST['ticket_id'])) {
+// Check if ticket_id is set in the GET request
+if (!isset($_GET['ticket_id'])) {
     die('Ticket ID not provided!');
 }
 
-$ticket_id = $_POST['ticket_id'];
+$ticket_id = $_GET['ticket_id']; // Retrieve the ticket_id from URL parameter
 
 // Database connection (replace with your actual database connection)
 $pdo = new PDO('mysql:host=localhost;dbname=smart_it_helpdesk', 'root', ''); // Replace with actual DB details

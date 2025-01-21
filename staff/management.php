@@ -24,6 +24,8 @@ $query = "
         tickets.assigned_to,
         tickets.description,
         tickets.attachment,
+        tickets.room_no,          -- Added room_no
+        tickets.pc_no,         -- Added pc_no
         user_creator.name AS user_name,
         user_creator.email AS user_email,
         it_staff.name AS it_staff_name,
@@ -118,6 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <table>
                 <tr><th>Category</th><td><?php echo htmlspecialchars($ticket['category']); ?></td></tr>
                 <tr><th>Title</th><td><?php echo htmlspecialchars($ticket['title']); ?></td></tr>
+                <tr><th>Room Number</th><td><?php echo htmlspecialchars($ticket['room_no']); ?></td></tr>
+            <tr><th>PC Number</th><td><?php echo htmlspecialchars($ticket['pc_no']); ?></td></tr>
                 <tr><th>Priority</th><td><?php echo htmlspecialchars($ticket['priority']); ?></td></tr>
                 <tr class="status-row"><th>Status</th>
                     <td>

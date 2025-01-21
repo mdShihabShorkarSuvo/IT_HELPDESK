@@ -12,11 +12,13 @@ $user_id = $_SESSION['user_id'];
 $category = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8');
 $title = htmlspecialchars($_POST['title'], ENT_QUOTES, 'UTF-8');
 $description = htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8');
+$room_no = htmlspecialchars($_POST['roomNo'], ENT_QUOTES, 'UTF-8'); // New field for Room No
+$pc_no = htmlspecialchars($_POST['pcNo'], ENT_QUOTES, 'UTF-8'); // New field for PC No
 $attachment = null;
 
 // Handle file upload
 if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] == 0) {
-    $allowed_types = ['image/jpeg','image/jpg', 'image/png', 'application/pdf'];
+    $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
     $max_size = 5 * 1024 * 1024; // 5 MB
     $upload_dir = '../uploads/';
     
@@ -44,9 +46,10 @@ if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] == 0) {
 }
 
 // Insert ticket into database
-$sql = "INSERT INTO tickets (user_id, category, title, description, attachment) VALUES (?, ?, ?, ?, ?)";
+$sql = "INSERT INTO tickets (user_id, category, title, description, room_no, pc_no, attachment) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("issss", $user_id, $category, $title, $description, $attachment);
+$stmt->bind_param("issssss", $user_id, $category, $title, $description, $room_no, $pc_no, $attachment);
 
 if ($stmt->execute()) {
     header("Location: user_page.php?page=submit-ticket");
