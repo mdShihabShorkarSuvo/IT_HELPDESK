@@ -20,7 +20,6 @@
             <ul class="links">
             <span class="close-btn material-symbols-rounded">close</span>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="tickets.php">Tickets</a></li>
                 <li><a href="services.php">Services</a></li>
                 <li><a href="about.php">About us</a></li>
                 <li><a href="contact.php">Contact us</a></li>
