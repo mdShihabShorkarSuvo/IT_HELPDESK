@@ -24,6 +24,8 @@ $query = "
         tickets.assigned_to,
         tickets.description,
         tickets.attachment,
+        tickets.room_no,          -- Added room_no
+        tickets.pc_no,            -- Added pc_no
         user_creator.name AS user_name,
         user_creator.email AS user_email,
         it_staff.name AS it_staff_name,
@@ -34,6 +36,7 @@ $query = "
     LEFT JOIN users AS it_staff ON tickets.assigned_to = it_staff.user_id
     WHERE tickets.ticket_id = :ticket_id
 ";
+
 $stmt = $pdo->prepare($query);
 $stmt->bindParam(':ticket_id', $ticket_id, PDO::PARAM_INT);
 $stmt->execute();
@@ -241,7 +244,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2>Ticket Information</h2>
         <form method="post" action="">
             <table>
+            <tr><th>Category</th><td><?php echo htmlspecialchars($ticket['category']); ?></td></tr>
                 <tr><th>Title</th><td><?php echo htmlspecialchars($ticket['title']); ?></td></tr>
+                <tr><th>Room Number</th><td><?php echo htmlspecialchars($ticket['room_no']); ?></td></tr>
+            <tr><th>PC Number</th><td><?php echo htmlspecialchars($ticket['pc_no']); ?></td></tr>
                 <tr><th>Priority</th>
                     <td>
                         <select name="priority" required>
@@ -263,7 +269,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </td>
                 </tr>
                 <tr><th>Deadline</th><td><input type="date" name="deadline" value="<?php echo htmlspecialchars($ticket['deadline']); ?>" min="<?php echo date('Y-m-d'); ?>" ></td></tr>
-                <tr><th>Category</th><td><?php echo htmlspecialchars($ticket['category']); ?></td></tr>
                 <tr><th>User Name</th><td><?php echo htmlspecialchars($ticket['user_name']); ?></td></tr>
                 <tr><th>User Email</th><td><?php echo htmlspecialchars($ticket['user_email']); ?></td></tr>
                 <tr><th>Assigned IT Staff</th><td id="assigned-staff"><?php echo htmlspecialchars($ticket['it_staff_name']); ?></td></tr>

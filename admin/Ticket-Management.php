@@ -171,6 +171,7 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <option value="Pending" <?php echo ($status_filter == 'Pending') ? 'selected' : ''; ?>>Pending</option>
                 <option value="In Progress" <?php echo ($status_filter == 'In Progress') ? 'selected' : ''; ?>>In Progress</option>
                 <option value="Resolved" <?php echo ($status_filter == 'Resolved') ? 'selected' : ''; ?>>Resolved</option>
+                <option value="Escalated" <?php echo ($status_filter == 'Escalated') ? 'selected' : ''; ?>>Escalated</option>
             </select>
         </form>
     </div>
