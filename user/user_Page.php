@@ -75,9 +75,8 @@ $_SESSION['user_id'] = $user['user_id'];
                             Submit Ticket</a></li>
                     <li><a href="user_page.php?page=my-tickets" class="menu-item"><i class="fas fa-clipboard-list"></i>
                             My Tickets</a></li>
-                    <li><a href="user_page.php?page=Rating" class="menu-item"><i class="fas fa-comments"></i> Rating</a></li>
-                    <li><a href="user_page.php?page=calendar" class="menu-item"><i class="fas fa-calendar-alt"></i>
-                            Calendar</a></li>
+                    <li><a href="user_page.php?page=Rating" class="menu-item"><i class="fas fa-star"></i> Feedback</a></li>
+                    <li><a href="user_page.php?page=calendar" class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
                 </ul>
             </nav>
         </aside>

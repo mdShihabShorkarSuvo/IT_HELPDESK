@@ -58,10 +58,18 @@
 
             <!-- Submit Button -->
             <div class="form-group">
-                <button type="submit" class="btn-submit">Submit</button>
+            <button type="submit" class="btn-submit" onclick="showSuccessMessage()">Submit</button>
             </div>
         </form>
     </div>
+
+    <script>
+        function showSuccessMessage() {
+            // Show the success message using a JavaScript alert
+            //alert("Ticket submitted successfully!");
+            window.alert("Ticket submitted successfully!");
+        }
+    </script>
 
 </body>
 </html>
@@ -71,3 +79,4 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     echo "<p style='color: green;'>Ticket submitted successfully!</p>";
 }
 ?>
+<!-- Success message div -->

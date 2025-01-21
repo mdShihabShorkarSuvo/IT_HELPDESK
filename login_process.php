@@ -35,6 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['role'];
 
+            // Set cookies for email and role (expires in 7 days)
+            setcookie("email", $user['email'], time() + (86400 * 7)); // Cookie valid for 7 days
+            setcookie("role", $user['role'], time() + (86400 * 7)); // Cookie valid for 7 days
+
             // Redirect based on role
             if ($user['role'] === 'admin') {
                 header("Location: admin/admin_page.php");
