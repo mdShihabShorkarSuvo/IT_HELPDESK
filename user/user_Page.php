@@ -19,33 +19,6 @@ $user_name = $user['name'];
 $profile_picture = $user['profile_picture'] ?? '../images/user.png';
 $_SESSION['user_id'] = $user['user_id'];
 
-// Add this function to handle rating
-function addRating($ticket_id, $rating, $review) {
-    global $conn;
-    $sql = "INSERT INTO ticket_ratings (ticket_id, user_id, rating, review) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iiis", $ticket_id, $_SESSION['user_id'], $rating, $review);
-    return $stmt->execute();
-}
-
-// Add this section to handle rating submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ticket_id'], $_POST['rating'], $_POST['review'])) {
-    $ticket_id = $_POST['ticket_id'];
-    $rating = $_POST['rating'];
-    $review = $_POST['review'];
-    if (addRating($ticket_id, $rating, $review)) {
-        // Send SMS notification after successful rating submission
-        $message = "Thank you for your feedback! Your rating for ticket ID $ticket_id has been submitted successfully.";
-        include 'send_sms.php'; // Include the SMS function from a separate file
-        if (sendSMS($message, $_SESSION['phone_number'])) {
-            echo "Rating submitted successfully and SMS sent.";
-        } else {
-            echo "Rating submitted successfully but failed to send SMS.";
-        }
-    } else {
-        echo "Failed to submit rating.";
-    }
-}
 
 ?>
 
@@ -79,8 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ticket_id'], $_POST['
                         <span id="profile-name"
                             style="text-align: center; display: block; margin-left: 20px; color: orange; font-size: 20px;"><?php echo htmlspecialchars($user_name); ?></span>
                         <!-- Display the user's name -->
-                        <!-- Display the user's name -->
-                        <!-- Display the user's name -->
+                        
 
                     </div>
                     <div id="profile-options" class="dropdown-content">
