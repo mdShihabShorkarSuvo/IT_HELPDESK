@@ -42,65 +42,7 @@ $escalatedTickets = $ticketCounts['escalated_count']; // New 'Escalated' status
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Basic dashboard styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
-
-        .dashboard {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
-            padding: 20px;
-        }
-
-        .dashboard .card {
-            width: 250px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(135deg, #6e7bff, #4e5cba);
-            text-align: center;
-            color: #fff;
-            padding: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        .dashboard .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .dashboard .card h3 {
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .dashboard .card p {
-            font-size: 28px;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .dashboard .card .icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        canvas {
-            max-width: 100%;
-            max-height: 400px;
-            margin-top: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/dashboard.css"> <!-- Link to external CSS file -->
 </head>
 <body>
 

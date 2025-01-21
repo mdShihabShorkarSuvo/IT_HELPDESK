@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resolved Tickets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/rating.css"> <!-- Link to external CSS file -->
     <script>
 // JavaScript function to hide the form after submission
 function hideForm(ticket_id) {
@@ -99,92 +100,4 @@ function hideForm(ticket_id) {
     }
     ?>
 </body>
-
-<style>
-/* General Styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 20px;
-}
-
-/* Rating Form Container */
-.rating-form {
-    margin: 20px 0;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-/* Star Rating System */
-.star-rating {
-    direction: rtl;
-    display: inline-block;
-    margin: 10px 0;
-}
-
-.star-rating input[type="radio"] {
-    display: none;
-}
-
-.star-rating label {
-    font-size: 2em;
-    color: #ddd;
-    cursor: pointer;
-}
-
-.star-rating input[type="radio"]:checked ~ label,
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-    color: #f5b301;
-}
-
-/* Textarea Styling */
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-    resize: vertical;
-}
-
-/* Submit Button */
-button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Message Styling */
-#message {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #d4edda;
-    color: #155724;
-    border-radius: 5px;
-}
-
-/* Hide Form if Rated */
-#ticket-form-<?= $ticket['ticket_id'] ?> {
-    display: block;
-    transition: opacity 0.5s ease-out;
-}
-
-.hidden {
-    display: none;
-}
-</style>
-
 </html>
