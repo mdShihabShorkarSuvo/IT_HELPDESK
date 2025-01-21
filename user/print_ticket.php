@@ -42,71 +42,7 @@ if (!$ticket) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print Ticket</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .ticket-container {
-            width: 800px;
-            margin: auto;
-            background: white;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .ticket-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .ticket-header h1 {
-            font-size: 24px;
-            color: #4CAF50;
-        }
-        .ticket-details {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .ticket-details th, .ticket-details td {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-        }
-        .ticket-details th {
-            background-color: #f4f4f4;
-            text-align: left;
-        }
-        .ticket-details td {
-            background-color: #fff;
-        }
-        .attachment-link {
-            color: #4CAF50;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .attachment-link:hover {
-            text-decoration: underline;
-        }
-        .print-button {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            padding: 10px 20px;
-            text-align: center;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .print-button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="css/print_ticket.css">
 </head>
 <body>
     <div class="ticket-container">

@@ -60,7 +60,7 @@ $conn->close();
 ?>
 
 <!-- Link to External CSS -->
-<link rel="stylesheet" href="notifications.css">
+<link rel="stylesheet" href="css/notifications.css">
 
 <!-- Link to External JavaScript -->
 <script src="notifications.js"></script>

@@ -28,56 +28,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            margin-bottom: 1rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        .user-id {
-            color: blue;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        select {
-            padding: 8px;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/fetch_users.css">
 </head>
 <body>
 <div class="container">
