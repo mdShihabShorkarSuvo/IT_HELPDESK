@@ -76,9 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt_update->bindParam(':ticket_id', $ticket_id, PDO::PARAM_INT);
     $stmt_update->execute();
 
-    // Redirect to refresh the data
-    header("Location: management.php?ticket_id=" . $ticket_id);
-    exit();
+      // Redirect with success parameter
+      header("Location: management.php?ticket_id=" . $ticket_id . "&success=1");
+      exit();
 }
 
 ?>
@@ -90,6 +90,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Ticket</title>
     <link rel="stylesheet" href="css/management.css">
+
+
+    <script>
+        // Check if the URL contains the success parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success') && urlParams.get('success') === '1') {
+            alert('Update Successful');
+        }
+    </script>
 </head>
 <body>
 

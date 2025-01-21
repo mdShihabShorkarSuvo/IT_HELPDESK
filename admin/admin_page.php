@@ -67,8 +67,8 @@ $_SESSION['user_id'] = $user['user_id']
                     <li><a href="admin_page.php?page=dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     <li><a href="admin_page.php?page=manage-users"  class="menu-item"><i class="fas fa-users"></i> Manage Users</a></li>
                     <li><a href="admin_page.php?page=Ticket-Management"  class="menu-item"><i class="fas fa-file-alt"></i> Ticket Management</a></li>
+                    <li><a href="admin_page.php?page=View-Feedback" class="menu-item"><i class="fas fa-comments"></i> View Feedback</a></li>
                     <li><a href="admin_page.php?page=calendar"  class="menu-item"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
-                    <li><a href="admin_page.php?page=View-Feedback"  class="menu-item"><i class="fas fa-calendar-alt"></i> View-Feedback</a></li>
 
                 </ul>
             </nav>
