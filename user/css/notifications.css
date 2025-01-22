@@ -69,14 +69,14 @@ hr {
 
 /* Style for the Notification Heading */
 .notification-heading {
-    font-size: 24px; /* Larger font size for the heading */
-    font-weight: bold; /* Bold text for emphasis */
-    color: #4CAF50; /* Green color for a positive tone */
-    text-align: center; /* Center align the heading */
-    padding: 15px 0; /* Vertical padding for spacing */
-    margin-bottom: 20px; /* Bottom margin to separate from notifications */
-    border-bottom: 2px solid #4CAF50; /* Green border under the heading */
-    background-color: #f4f4f4; /* Light background for contrast */
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #4CAF50; 
+    text-align: center; 
+    padding: 15px 0; 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #4CAF50; 
+    background-color: #f4f4f4; 
     border-radius: 5px; /* Rounded corners */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
 }
