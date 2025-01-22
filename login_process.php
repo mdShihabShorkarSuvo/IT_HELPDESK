@@ -14,16 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare SQL to fetch user details
-    $sql = "SELECT email, password, role FROM users WHERE email = ? AND role = ?";
+    $sql = "SELECT email, password, role FROM users WHERE email = ? AND role = ?"; // SQL with parameters
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
         die("SQL preparation failed: " . $conn->error);
     }
 
-    $stmt->bind_param("ss", $email, $role);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->bind_param("ss", $email, $role); // Bind variables to the prepared statement as parameters
+    $stmt->execute(); // Execute the prepared statement
+    $result = $stmt->get_result(); 
 
     // Check if a user with the given email and role exists
     if ($result->num_rows === 1) {
